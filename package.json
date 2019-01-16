@@ -1,0 +1,22 @@
+{
+  "name": "homebridge-homie",
+  "version": "0.1.0",
+  "description": "Homie devices available in HomeKit",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "homie",
+    "iot",
+    "homebridge"
+  ],
+  "author": "Benoit Charbonnier <benoit.charbonnier@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.12.0"
+  },
+  "dependencies": {
+    "mqtt": "^2.18.8"
+  }
+}
