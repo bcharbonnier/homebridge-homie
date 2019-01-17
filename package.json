@@ -6,10 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "homebridge": ">= 0.2.0"
+  },
   "keywords": [
     "homie",
     "iot",
-    "homebridge"
+    "homebridge",
+    "homebridge-plugin"
   ],
   "author": "Benoit Charbonnier <benoit.charbonnier@gmail.com>",
   "license": "ISC",

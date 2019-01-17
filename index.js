@@ -16,7 +16,7 @@ module.exports = homebridge => {
 
     homebridge.registerPlatform(
         "homebridge-homie",
-        "HomiePlatform",
+        "Homie",
         HomiePlatform,
         true
     );
@@ -35,7 +35,8 @@ class HomiePlatform {
             return;
         }
         this.config = config;
-        this.url = `mqtt://${config.host}:${config.post}`;
+        this.url = `mqtt://${config.mqttHost}:${config.mqttPort}`;
+        this.topic = config.baseTopic || "homie";
 
         const options = {
             clientId: "homebridge-homie"
@@ -53,7 +54,7 @@ class HomiePlatform {
         if (api) {
             this.api = api;
             this.api.on("didFinishLaunching", () => {
-                this.log("DidFinishLaunching");
+                this.log.debug("DidFinishLaunching");
             });
         }
     }
@@ -70,7 +71,7 @@ class HomiePlatform {
 
         this.api.registerPlatformAccessories(
             "homebridge-homie",
-            "HomiePlatform",
+            "Homie",
             [accessory]
         );
     }
@@ -78,10 +79,11 @@ class HomiePlatform {
     removeAccessory() {}
 
     onMqttConnect() {
-        this.log.debug(`Connected to mqtt broker on ${this.url}`);
+        this.log(`Connected to mqtt broker on ${this.url}`);
+        this.mqtt.subscribe(`${this.topic}/#`);
     }
 
     onMqttMessage(topic, payload) {
-        this.log.debug("%s, %s", topic.toString(), payload);
+        this.log.debug("%s, %s", topic, payload.toString());
     }
 }
